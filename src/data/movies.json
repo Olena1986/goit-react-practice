@@ -120,23 +120,6 @@
   },
   {
     "adult": false,
-    "backdrop_path": "/odJ4hx6g6vBt4lBWKFD1tI8WS4x.jpg",
-    "id": 361743,
-    "title": "Top Gun: Maverick",
-    "original_language": "en",
-    "original_title": "Top Gun: Maverick",
-    "overview": "After more than thirty years of service as one of the Navy's top aviators, and dodging the advancement in rank that would ground him, Pete "Maverick" Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen.",
-    "poster_path": "/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
-    "media_type": "movie",
-    "genre_ids": [28, 18],
-    "popularity": 1734.241,
-    "release_date": "2022-05-24",
-    "video": false,
-    "vote_average": 8.369,
-    "vote_count": 3682
-  },
-  {
-    "adult": false,
     "backdrop_path": "/3ylmB3cENHUGF5mePdmhe54Di9d.jpg",
     "id": 604571,
     "title": "Deus",

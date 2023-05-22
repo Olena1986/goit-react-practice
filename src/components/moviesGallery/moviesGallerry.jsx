@@ -1,10 +1,14 @@
-export function MoviesGallery({ movies }) {
+export function MoviesGallery({ movies, onDelete }) {
   return (
     <ul>
-      <li>
-        <h2>{Title}</h2>
-        <button>Delete</button>
-      </li>
+      {movies.map(({ id, title }) => {
+        return (
+          <li key={id}>
+            <h2>{title}</h2>
+            <button onClick={() => onDelete(id)}>Delete</button>
+          </li>
+        );
+      })}
     </ul>
   );
 }
