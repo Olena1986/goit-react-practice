@@ -1,36 +1,12 @@
 import { Component } from 'react';
-import { data } from '../data/users';
-import { UsersList } from './usersList/usersList';
-import AddForm from './AddForm';
-import { nanoid } from 'nanoid';
-
+import { movies } from '../data/movies.json';
+import { MoviesGallery } from './moviesGallery/moviesGallerry';
 export class App extends Component {
   state = {
-    users: data,
-  };
-
-  addUser = userData => {
-    const newUser = {
-      id: nanoid(),
-      ...userData,
-    };
-    this.setState(prevState => {
-      return { users: [...prevState.users, newUser] };
-    });
-  };
-
-  deleteUser = id => {
-    this.setState(prevState => {
-      return { users: prevState.users.filter(user => user.id !== id) };
-    });
+    movies: movies,
   };
   render() {
-    const { users } = this.state;
-    return (
-      <div>
-        <UsersList users={users} deleteUser={this.deleteUser} />
-        <AddForm addUser={this.addUser} />
-      </div>
-    );
+    const { movies } = this.state;
+    return <MoviesGallery movies={movies} />;
   }
 }
