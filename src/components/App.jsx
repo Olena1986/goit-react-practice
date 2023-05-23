@@ -1,23 +1,36 @@
 import { Component } from 'react';
-import movies from '../data/movies.json';
 import { MoviesGallery } from './moviesGallery/moviesGallerry';
+import Button from './Button';
+import { fetchMovies } from '../services/api.js';
+import Loader from './Loader';
+
 export class App extends Component {
   state = {
-    movies: movies,
+    movies: [],
+    isListShow: false,
+    page: 1,
+    isLoading: false,
   };
 
-  componentDidMount() {
-    const data = localStorage.getItem('movies');
-    if (data !== null) {
-      this.setState({ movies: JSON.parse(data) });
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isListShow !== this.state.isListShow) {
+      this.setState({ isLoading: true });
+      fetchMovies(this.state.page)
+        .then(({ data: { results } }) =>
+          this.setState(prevState => {
+            return { movies: [...prevState.movies, ...results] };
+          })
+        )
+        .catch(error => {
+          console.log(error);
+        })
+        .finally(() => this.setState({ isLoading: false }));
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.movies !== this.state.movies) {
-      localStorage.setItem('movies', JSON.stringify(this.state.movies));
-    }
-  }
+  changeVisibility = () => {
+    this.setState({ isListShow: true });
+  };
 
   deleteMovie = id => {
     this.setState(prevState => {
@@ -26,7 +39,16 @@ export class App extends Component {
   };
 
   render() {
-    const { movies } = this.state;
-    return <MoviesGallery movies={movies} onDelete={this.deleteMovie} />;
+    const { movies, isListShow, isLoading } = this.state;
+    return (
+      <>
+        {isListShow ? (
+          <MoviesGallery movies={movies} onDelete={this.deleteMovie} />
+        ) : (
+          <Button text={'Show movies'} clickHander={this.changeVisibility} />
+        )}
+        {isLoading && <Loader />}
+      </>
+    );
   }
 }
